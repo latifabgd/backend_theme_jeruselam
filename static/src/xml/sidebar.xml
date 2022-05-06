@@ -1,0 +1,140 @@
+<?xml version="1.0" encoding="utf-8"?>
+<templates id="template" xml:space="preserve">
+    <t t-inherit="web.NavBar" t-inherit-mode="extension"
+       owl="1">
+           <xpath expr="//t[@t-call='web.NavBar.AppsMenu']" position="after">
+              <t t-call="web.NavBar.AppsMenu">
+                    <t t-set="apps" t-value="menuService.getApps()"/>
+              </t>
+               <MenuItem
+                       t-if="currentApp"
+                       href="getMenuItemHref(currentApp)"
+                       payload="currentApp"
+                       t-esc="currentApp.name"
+                       class="o_menu_brand"
+                       t-ref="menuBrand"
+               />
+          </xpath>
+    </t>
+    <t t-inherit="web_enterprise.EnterpriseNavBar" t-inherit-mode="extension"
+       owl="1">
+        <xpath expr="//nav" position="before">
+
+
+    <span class="sidebar_panel" id="sidebar_panel" style="display:block;width:90px;">
+    <div class="sidebar">
+         <div class="nk-body bg-lighter npc-default has-sidebar ">
+             <div class="nk-app-root">
+                 <div class="nk-main ">
+                     <div class="nk-sidebar nk-sidebar-fixed is-light " id="nk_sidebar">
+                         <div class="nk-sidebar-element nk-sidebar-head" id="nk_sidebar_head">
+                                 <div class="nk-sidebar-brand">
+                                   <span class="logo-link nk-sidebar-logo">
+                                       <img class="logo-dark logo-img" src="/theme_jerusalem/static/src/img/logo-dark2x.png" srcset="/theme_jerusalem/static/src/img/logo-dark2x.png 2x" alt="logo-dark" style="visibility: hidden;" id="logo_img"/>
+                                       <img class="logo-dark logo-img" src="/theme_jerusalem/static/src/img/rtl_logo-dark2x.png" srcset="/theme_jerusalem/static/src/img/rtl_logo-dark2x.png 2x" alt="rtl-logo-dark" style="visibility: hidden;" id="rtl_logo_img"/>
+                                       <img class="logo-small logo-img logo-img-small" src="/theme_jerusalem/static/src/img/logo-small2x.png" srcset="/theme_jerusalem/static/src/img/logo-small2x.png" alt="logo-small" id="logo"/>
+                                    </span>
+                                </div>
+                                <div class="nk-menu-trigger me-n2" style="visibility: hidden;" id="close_btn">
+                                    <a class="nk-nav-toggle nk-quick-nav-icon d-xl-none" data-target="sidebarMenu">
+                                        <em id="closeSidebar" class="icon ni ni-arrow-left side_app"></em></a>
+                                    <a class="nk-nav-compact nk-quick-nav-icon d-none d-xl-inline-flex" data-target="sidebarMenu">
+                                        <em id="closeSidebar" class="icon ni ni-menu side_app sidebar"></em></a>
+                                </div>
+                            </div>
+<!--                         <div style="margin:8px;"></div>-->
+
+                         <div class="nk-sidebar-element">
+                             <span class="nk-menu-heading" style=" visibility: hidden;" id="apps_title">
+                                <div class="overline-title text-primary-alt">
+                                    <span style="padding-left:10px;"></span>
+                                    Applications
+                                </div>
+                             </span>
+                              <ul class="sidebar_menu">
+	                            <t t-foreach="menuService.getAllMenusSection()" t-as="app">
+                                    <t t-if="app==currentApp">
+                                        <div class="dashboard-nav-dropdown">
+                                            <a role="menuitem" t-attf-href="#menu_id={{app.id}}" class="dashboard-nav-item nk-menu-link">
+                                                <img class=" nk-menu-icon" t-attf-src="{{app.webIconData}}"/>
+                                                <span style="padding-left:20px;"></span>
+                                                 <span class="sidebar_app_name nk-menu-text">
+                                                     <span style=" visibility: hidden;" id="app_name"><t t-esc="app.name"/></span>
+                                                     <span style="padding-left:20px;"></span>
+                                                     <span class="nk-menu-badge" style="visibility: hidden;right:24px !important;" id="current_app"> CURRENT </span>
+                                                </span>
+
+                                            </a>
+                                        </div>
+                                    </t>
+                                    <t t-else="">
+                                        <div class="dashboard-nav-dropdown">
+                                            <a role="menuitem" t-attf-href="#menu_id={{app.id}}" class="dashboard-nav-item nk-menu-link">
+                                                <img class=" nk-menu-icon" t-attf-src="{{app.webIconData}}"/>
+                                                <span style="padding-left:20px;"></span>
+                                                 <span style="visibility: hidden;" class="sidebar_app_name nk-menu-text app_name_cls">
+                                                    <t t-esc="app.name"/>
+                                                </span>
+                                            </a>
+                                        </div>
+                                    </t>
+<!--                                    <div t-if="app.name==currentApp.name">-->
+<!--                                         <a role="menuitem" t-attf-href="#menu_id={{app.id}}" class="dashboard-nav-item nk-menu-link">-->
+<!--                                            <img class=" nk-menu-icon" t-attf-src="{{app.webIconData}}"/>-->
+<!--                                            <span style="padding-left:20px;"></span>-->
+<!--                                             <span class="sidebar_app_name nk-menu-text">-->
+<!--                                                <t t-esc="app.name"/>-->
+<!--                                            </span>-->
+<!--                                             <span class="nk-menu-badge">HOT</span>-->
+<!--                                        </a>-->
+<!--                                    </div>-->
+<!--                                    <div t-if="app.children[0]" class="dashboard-nav-dropdown">-->
+<!--                                         <a role="menuitem" href="#" class="dashboard-nav-item dashboard-nav-dropdown-toggle nk-menu-link">-->
+<!--                                            <img class="nk-menu-icon" t-attf-src="{{app.webIconData}}"/>-->
+<!--                                             <span style="padding-left:20px;"></span>-->
+<!--                                            <span class="sidebar_app_name nk-menu-text">-->
+<!--                                                <t t-esc="app.name"/>-->
+<!--                                            </span>-->
+<!--                                        </a>-->
+<!--&lt;!&ndash;                                            <t t-foreach="app.childrenTree" t-as="section">&ndash;&gt;-->
+<!--&lt;!&ndash;                                                <div class='dashboard-nav-dropdown-menu nk-menu-item'>&ndash;&gt;-->
+<!--&lt;!&ndash;                                                    <t t-if="section.children[0]" >&ndash;&gt;-->
+<!--&lt;!&ndash;                                                    <a href="#" class="dashboard-nav-dropdown-item dashboard-nav-dropdown-toggle_submenu" data-section="{{section.id}}" data-menu-xmlid="">&ndash;&gt;-->
+<!--&lt;!&ndash;                                                        <t t-esc="section.name"></t>&ndash;&gt;-->
+<!--&lt;!&ndash;                                                    </a>&ndash;&gt;-->
+<!--&lt;!&ndash;                                                    <div t-if="section.children[0]" class='dashboard-nav-dropdown-menu submenu'>&ndash;&gt;-->
+<!--&lt;!&ndash;                                                        <t t-foreach="section.childrenTree" t-as="submenu">&ndash;&gt;-->
+<!--&lt;!&ndash;                                                            <a t-attf-href="#menu_id={{submenu.id}}" class="dashboard-nav-dropdown-item " data-section="{{submenu.id}}" data-menu-xmlid="">&ndash;&gt;-->
+<!--&lt;!&ndash;                                                                    <t t-esc="submenu.name"></t>&ndash;&gt;-->
+
+<!--&lt;!&ndash;                                                            </a>&ndash;&gt;-->
+<!--&lt;!&ndash;                                                        </t>&ndash;&gt;-->
+<!--&lt;!&ndash;                                                    </div>&ndash;&gt;-->
+<!--&lt;!&ndash;                                                    </t>&ndash;&gt;-->
+<!--&lt;!&ndash;                                                    <t t-else="">&ndash;&gt;-->
+<!--&lt;!&ndash;                                                        <a t-attf-href="#menu_id={{app.id}}" class="dashboard-nav-dropdown-item" data-section="{{section.id}}" data-menu-xmlid="">&ndash;&gt;-->
+<!--&lt;!&ndash;                                                            <t t-esc="section.name"></t>&ndash;&gt;-->
+<!--&lt;!&ndash;                                                    </a>&ndash;&gt;-->
+<!--&lt;!&ndash;                                                    </t>&ndash;&gt;-->
+<!--&lt;!&ndash;                                                </div>&ndash;&gt;-->
+<!--&lt;!&ndash;                                            </t>&ndash;&gt;-->
+
+
+<!--                                        </div>-->
+                                    <div style="margin:10px;"></div>
+                                </t>
+                              </ul>
+                        </div>
+                         <div style="margin:30px;"></div>
+                     </div>
+                 </div>
+             </div>
+         </div>
+    </div>
+
+</span>
+
+</xpath>
+    </t>
+
+</templates>

@@ -1,0 +1,238 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<templates id="template" xml:space="preserve">
+
+
+    <t t-extend="ListView.buttons">
+      <t  t-jquery="button.o_list_button_add" t-operation="replace">
+            <button type="button" class="btn btn-primary o_list_button_add d-flex align-items-center" title="Create record" accesskey="c">
+                <i class="fa fa-plus"></i>
+                <span class="px-4">Create</span>
+
+            </button>
+        </t>
+    </t>
+
+
+
+    <t t-inherit="web.ControlPanel" t-inherit-mode="extension" owl="1">
+        <xpath expr="//div[hasclass('o_control_panel')]" position="replace">
+            <div class="o_control_panel">
+                <div class="top_panel">
+                    <div class="o_cpe_left">
+                        <div class="o_cp_top">
+                            <div class="o_cp_top_left">
+                                <t t-slot="control-panel-top-left">
+                                    <t t-call="web.Breadcrumbs" />
+                                </t>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="o_cpe_right">
+                        <div class="o_cp_searchview" role="search" t-ref="searchView">
+                            <div t-if="display['top-right']" class="o_cp_top_right">
+                                <t t-slot="control-panel-top-right">
+                                    <SearchBar/>
+                                </t>
+                            </div>
+                        </div>
+    <!--                </div>-->
+                        <div class="o_cp_bottom_right">
+                            <div t-if="display['bottom-right']" class="o_cp_bottom_right">
+                                <t t-slot="control-panel-bottom-right">
+                                    <div class="btn-group o_search_options position-static" role="search">
+                                        <t t-foreach="searchMenus" t-as="menu" t-key="menu.key">
+                                            <t t-component="menu.Component"/>
+                                        </t>
+                                    </div>
+                                </t>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="bottom_panel oth-cnp">
+                    <div t-if="display['bottom']" class="o_cp_bottom">
+                        <div t-if="display['bottom-left']" class="o_cp_bottom_left">
+                            <t t-slot="control-panel-bottom-left"/>
+                        </div>
+                    </div>
+                    <div class="">
+                        <t t-if="(env.config.viewSwitcherEntries or []).length">
+                        <nav class="btn-group o_cp_switch_buttons">
+                            <t t-foreach="env.config.viewSwitcherEntries" t-as="view" t-key="view.type">
+                                <button class="btn btn-light fa fa-lg o_switch_view "
+                                    t-attf-class="o_{{view.type}} {{view.icon}} {{view.active ? 'active' : ''}}"
+                                    t-att-data-tooltip="view.name"
+                                    t-on-click="onViewClicked(view.type)"
+                                    />
+                            </t>
+                        </nav>
+                    </t>
+
+
+                    </div>
+                </div>
+
+            </div>
+        </xpath>
+    </t>
+    <t t-inherit="web_enterprise.ControlPanel" t-inherit-mode="extension" owl="1">
+        <xpath expr="//div[hasclass('o_control_panel')]" position="inside">
+            <p>hello2</p>
+        </xpath>
+    </t>
+    <t t-inherit="web.Legacy.ControlPanel" t-inherit-mode="extension" owl="1">
+        <xpath expr="//div[hasclass('o_control_panel')]" position="replace">
+            <div class="o_control_panel">
+                <div class="top_panel">
+                    <div class="o_cpe_left">
+                        <div class="o_cp_top">
+                            <div class="o_cp_top_left">
+                                <ol t-if="props.withBreadcrumbs" class="breadcrumb" role="navigation">
+                                    <li t-foreach="props.breadcrumbs" t-as="bc" t-key="bc.controllerID" class="breadcrumb-item" t-att-class="{ o_back_button: bc_index === props.breadcrumbs.length - 1 }"  t-att-accesskey="bc_last and 'b'"  t-on-click.prevent="trigger('breadcrumb-clicked', { controllerID: bc.controllerID })">
+                                        <a t-if="bc.title" href="#" t-esc="bc.title"/>
+                                        <em t-else="" class="text-warning">Unnamed</em>
+                                    </li>
+                                    <li class="breadcrumb-item active page-title">
+                                        <t t-if="props.title" t-esc="props.title"/>
+                                        <em t-else="" class="text-warning">Unnamed</em>
+                                    </li>
+                                </ol>
+                            </div>
+                        </div>
+                    </div>
+                <div class="o_cpe_right">
+                    <div class="o_cp_searchview" role="search" t-ref="searchView">
+                        <div t-if="props.withSearchBar" class="o_searchview" role="search" aria-autocomplete="list" >
+                            <i class="o_searchview_icon fa fa-search" title="Search..." role="img" aria-label="Search..." />
+                            <SearchBar t-if="props.withSearchBar" fields="fields"/>
+                        </div>
+                    </div>
+<!--                </div>-->
+                    <div class="o_cp_bottom_right">
+                        <div class="btn-group o_search_options position-static" role="search" t-ref="searchViewButtons">
+                            <t t-if="props.withSearchBar">
+                                <FilterMenu t-if="props.searchMenuTypes.includes('filter')" class="o_filter_menu" fields="fields" />
+                                <GroupByMenu t-if="props.searchMenuTypes.includes('groupBy')" class="o_group_by_menu" fields="fields" />
+                                <ComparisonMenu t-if="props.searchMenuTypes.includes('comparison') and model.get('filters', f => f.type === 'comparison').length"  class="o_comparison_menu"
+                                />
+<!--                                <FavoriteMenu t-if="props.searchMenuTypes.includes('favorite')" class="o_favorite_menu" />-->
+                            </t>
+                        </div>
+                    </div>
+                    <div class="o_cp_bottom">
+                        <div class="o_cp_bottom_left">
+                            <div class="o_cp_buttons" role="toolbar" aria-label="Control panel buttons" t-ref="buttons">
+                                <t t-slot="buttons"/>
+                            </div>
+                            <ActionMenus t-if="props.actionMenus and props.actionMenus.items" t-props="props.actionMenus"/>
+                        </div>
+                    </div>
+                    </div>
+                </div>
+                <div class="bottom_panel">
+                    <nav t-if="props.views.length gt 1" class="btn-group o_cp_switch_buttons" role="toolbar" aria-label="View switcher">
+                            <t t-foreach="props.views" t-as="view" t-key="view.type">
+                                <t t-call="web.ViewSwitcherButton"/>
+                            </t>
+                        </nav>
+                    <div class="o_cp_pager" role="search" t-ref="pager">
+                            <Pager t-if="props.pager and props.pager.limit" t-props="props.pager"/>
+                        </div>
+                </div>
+
+
+
+
+            </div>
+        </xpath>
+    </t>
+
+
+
+
+
+
+
+
+
+
+
+
+
+        <t t-inherit="mail.MessagingMenu" t-inherit-mode="extension" owl="1">
+        <xpath expr="//i[hasclass('o_MessagingMenu_icon')]" position="replace">
+            <i class="icon ni ni-comments"></i>
+        </xpath>
+        </t>
+
+        <t t-inherit="mail.systray.ActivityMenu" t-inherit-mode="extension" owl="1">
+            <xpath expr="//i[hasclass('fa-clock-o')]" position="replace">
+                <i class="icon ni ni-bell"></i>
+            </xpath>
+        </t>
+
+<!--    group by menu inherit -->
+      <t t-inherit="web.GroupByMenu" t-inherit-mode="extension" owl="1">
+        <xpath expr="//Dropdown[hasclass('o_group_by_menu')]" position="replace">
+            <Dropdown class="o_group_by_menu btn-group"
+            togglerClass="'btn btn-light'"
+            t-props="dropdownProps"
+            t-on-dropdown-item-selected="onGroupBySelected"
+        >
+            <t t-set-slot="toggler">
+
+                <span class="o_dropdown_title tt">Group By
+                    <t t-if="props.showCaretDown">
+                        <i class="fa fa-chevron-down ml-1"/>
+
+                    </t>
+                </span>
+                <i class="small fa fa-chevron-down mr-1" t-att-class="icon"/>
+            </t>
+            <t t-set="currentGroup" t-value="null"/>
+            <t t-foreach="items" t-as="item" t-key="item.id">
+                <t t-if="currentGroup !== null and currentGroup !== item.groupNumber">
+                    <div class="dropdown-divider" role="separator"/>
+                </t>
+                <t t-if="item.options">
+                    <Dropdown togglerClass="'o_menu_item' + (item.isActive ? ' selected' : '')">
+                        <t t-set-slot="toggler">
+                            <t t-esc="item.description"/>
+                        </t>
+                        <t t-set="subGroup" t-value="null"/>
+                        <t t-foreach="item.options" t-as="option" t-key="option.id">
+                            <t t-if="subGroup !== null and subGroup !== option.groupNumber">
+                                <div class="dropdown-divider" role="separator"/>
+                            </t>
+                            <DropdownItem class="o_item_option"
+                                t-att-class="{ selected: option.isActive }"
+                                payload="{ itemId: item.id, optionId: option.id }"
+                                parentClosingMode="'none'"
+                                t-esc="option.description"
+                            />
+                            <t t-set="subGroup" t-value="option.groupNumber"/>
+                        </t>
+                    </Dropdown>
+                </t>
+                <t t-else="">
+                    <DropdownItem class="o_menu_item"
+                        t-att-class="{ selected: item.isActive }"
+                        payload="{ itemId: item.id }"
+                        parentClosingMode="'none'"
+                        t-esc="item.description"
+                    />
+                </t>
+                <t t-set="currentGroup" t-value="item.groupNumber"/>
+            </t>
+            <t t-if="fields.length">
+                <div t-if="items.length" role="separator" class="dropdown-divider"/>
+                <CustomGroupByItem fields="fields" t-on-add-custom-group="onAddCustomGroup"/>
+            </t>
+        </Dropdown>
+        </xpath>
+    </t>
+
+</templates>
+

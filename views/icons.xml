@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<odoo>
+    <data>
+        <menuitem id="base.menu_administration" name="Settings"
+                  web_icon="theme_jerusalem,static/src/img/icons/settings.png"/>
+        <menuitem id="base.menu_management" name="Apps"
+                  web_icon="theme_jerusalem,static/src/img/icons/apps.png"/>
+
+<!--        <menuitem id="base.menu_management" name="Manufacturing"-->
+<!--                  web_icon="code_backend_theme_enterprise,static/src/img/icons/manufacturing.png"/>-->
+<!--        <menuitem id="base.menu_management" name="Contacts"-->
+<!--                  web_icon="code_backend_theme_enterprise,static/src/img/icons/contacts.png"/>-->
+    </data>
+</odoo>
+

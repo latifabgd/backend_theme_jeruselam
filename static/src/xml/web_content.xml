@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<templates xml:space="preserve">
+
+      <t t-inherit="web.Layout" t-inherit-mode="extension" owl="1">
+          <xpath expr="//div" position="replace">
+            <div class="pagination">
+                <p>Hello</p>
+<!--                <div class="o_cp_pager" role="search" t-ref="pager">-->
+<!--                    <Pager t-if="props.pager and props.pager.limit" t-props="props.pager"/>-->
+<!--                </div>-->
+            </div>
+
+
+    </xpath>
+      </t>
+
+
+</templates>
