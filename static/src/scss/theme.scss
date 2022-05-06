@@ -887,6 +887,18 @@ body,p,span,a,h1,h2,h3,h4,h5,h6,div,td,th,li{
         padding-bottom: 50px !important
 }
 
+// header fixed
+
+.o_web_client > header{
+    position: fixed;
+    width: 100%;
+    z-index: 200;
+}
+html .o_web_client > .o_action_manager{
+   padding-top: 8%;
+}
+
+
 
 // responsive css
 
@@ -956,6 +968,22 @@ body,p,span,a,h1,h2,h3,h4,h5,h6,div,td,th,li{
     .o_kanban_view.o_kanban_ungrouped .o_kanban_record{
         margin-bottom: 10px;
     }
+
+    .o_kanban_view.o_kanban_ungrouped .o_kanban_record {
+            width: auto;
+    }
+    html .o_web_client > .o_action_manager{
+       padding-top: 15%;
+    }
+    .o_burger_menu .o_burger_menu_content.o_burger_menu_dark {
+        background-color: #854fff;
+    }
+    .o_burger_menu .o_burger_menu_topbar {
+        background: #854fff;
+    }
+    .o_burger_menu .o_burger_menu_content .o_burger_menu_app .o_dropdown_active, .o_burger_menu .o_burger_menu_content .o_burger_menu_app .dropdown-menu {
+        border: 0 !important;
+    }
 }
 
 @media (max-width:1200px){
@@ -992,4 +1020,25 @@ body,p,span,a,h1,h2,h3,h4,h5,h6,div,td,th,li{
     html .o_web_client > .o_action_manager {
         padding-left: 30px !important;
     }
+}
+
+@media (max-width: 426px){
+.o_control_panel .o_cp_bottom_right {
+    flex-wrap: wrap;
+    flex-direction: column-reverse;
+    align-items: end;
+}
+header .o_main_navbar {
+    background-color: #fff;
+    height: 50px;
+    justify-content: center;
+    align-items: center;
+    grid-template-rows: 50px;
+    grid-template-columns: minmax(35px, max-content) max-content minmax(35px, 1fr) fit-content(100%);
+    border-bottom: 1px solid transparent;
+    padding-left: 55px;
+}
+.icon.ni {
+    font-size: 20px !important;
+}
 }
