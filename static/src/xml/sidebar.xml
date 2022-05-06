@@ -26,7 +26,7 @@
          <div class="nk-body bg-lighter npc-default has-sidebar ">
              <div class="nk-app-root">
                  <div class="nk-main ">
-                     <div class="nk-sidebar nk-sidebar-fixed is-light " id="nk_sidebar">
+                     <div class="nk-sidebar nk-sidebar-fixed is-light nk_desactive" id="nk_sidebar">
                          <div class="nk-sidebar-element nk-sidebar-head" id="nk_sidebar_head">
                                  <div class="nk-sidebar-brand">
                                    <span class="logo-link nk-sidebar-logo">

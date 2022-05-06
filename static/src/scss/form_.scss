@@ -318,11 +318,13 @@ o_datepicker_button:hover{
 o_datepicker_button:focus{
    color:gray !important;
 }
-.badge {
+
+.o_field_many2manytags .badge {
     height: 25px;
     padding: inherit;
     margin-top: 0px !important;
 }
+
 .o_form_view .o_horizontal_separator {
     margin-bottom: 0.75rem;
     font-size: 1.25rem;

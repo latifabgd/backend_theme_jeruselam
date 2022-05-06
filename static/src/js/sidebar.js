@@ -10,6 +10,7 @@ odoo.define('theme_jerusalem.SideBar', function (require) {
         $('#sidebar_panel').show()
 
         $(document).on("mouseenter", "#sidebar_panel", function(event){
+            if ($(window).width() > 1200) {
             $("#nk_sidebar").css({'width':'290px'});
             $("#nk_sidebar_head").css({'width':'290px'});
             $("#rtl_logo_img").css({'visibility':'visible'});
@@ -21,9 +22,11 @@ odoo.define('theme_jerusalem.SideBar', function (require) {
             $("#current_app").css({'visibility':'visible'});
             $("#other_app_name").css({'visibility':'visible'});
             $(".app_name_cls").css({'visibility':'visible'});
+        }
 
         });
         $(document).on("mouseleave", "#sidebar_panel", function(event){
+            if ($(window).width() > 1200) {
             if(sidebar_closes_aut == 0){
                 $("#nk_sidebar").css({'width':'90px'});
                 $("#nk_sidebar_head").css({'width':'90px'});
@@ -50,6 +53,7 @@ odoo.define('theme_jerusalem.SideBar', function (require) {
                 $("#current_app").css({'visibility':'visible'});
                 $("#other_app_name").css({'visibility':'visible'});
                 $(".app_name_cls").css({'visibility':'visible'});
+            }
             }
 
         });
