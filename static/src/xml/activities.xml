@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<templates xml:space="preserve">
+
+      <t t-inherit="mail.systray.ActivityMenu.Previews" t-inherit-mode="extension" owl="1">
+          <xpath expr="//div[hasclass('o_mail_preview_image')]" position="replace">
+                <div t-if="activity.icon" class="o_mail_preview_image o_mail_preview_app">
+<!--                    <img t-att-src="activity.icon" alt="Activity"/>-->
+
+                    <t t-if="!activity.overdue_count" >
+                        <em class="icon icon-circle bg-success-dim ni ni-curve-down-left"></em>
+                    </t>
+                    <t t-else="activity.overdue_count">
+                        <em class="icon icon-circle bg-warning-dim ni ni-curve-down-right"></em>
+                    </t>
+<!--                    <t t-if ="activity.model == 'account.move'">-->
+<!--                        <img src="/theme_jerusalem/static/src/img/icons/accounting.png" alt="Activity"/>-->
+<!--                    </t>-->
+<!--                    <t t-elif= "activity.model == 'purchase.order'">-->
+<!--                        <img src="/theme_jerusalem/static/src/img/icons/purchase.png" alt="Activity"/>-->
+<!--                    </t>-->
+<!--                     <t t-else="">-->
+<!--                         <img t-att-src="activity.icon" alt="Activity"/>-->
+<!--                     </t>-->
+                </div>
+
+          </xpath>
+
+
+      </t>
+    <t t-inherit="mail.systray.ActivityMenu" t-inherit-mode="extension" owl="1">
+         <xpath expr="//div[hasclass('o_mail_systray_dropdown_items')]" position="before">
+              <div class="dropdown-head">
+                  <span class="sub-title nk-dropdown-title">Notifications</span>
+              </div>
+          </xpath>
+    </t>
+
+
+</templates>
