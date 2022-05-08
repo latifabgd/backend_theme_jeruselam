@@ -41,7 +41,10 @@
             '/theme_jerusalem/static/src/xml/top_bar.xml',
             '/theme_jerusalem/static/src/xml/systray.xml',
             '/theme_jerusalem/static/src/xml/sidebar.xml',
+            '/theme_jerusalem/static/src/xml/activities.xml',
+
             # '/theme_jerusalem/static/src/xml/web_content.xml',
+
 
         },
         'web.assets_frontend': {
