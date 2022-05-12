@@ -6,7 +6,7 @@
     "version": "15.0.1.0.0",
     'author': 'KA_BGHD',
 
-    "depends": ['base', 'web', 'mail','web_enterprise','purchase','project','hr'],
+    "depends": ['base', 'web', 'mail','web_enterprise','purchase','project','hr','login_design'],
 
     "data": [
         'security/ir.model.access.csv',
