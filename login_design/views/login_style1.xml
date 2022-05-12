@@ -1,0 +1,342 @@
+<odoo>
+    <data>
+        <template id="login_design.frontend_layout3" name="theme_jerusalem" inherit_id="web.layout" primary="True">
+
+            <xpath expr="//head/meta[last()]" position="after">
+                <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no"/>
+            </xpath>
+
+            <xpath expr="//head/link[last()]" position="after">
+                <t t-call-assets="web.assets_common" t-js="false"/>
+                <t t-call-assets="web.assets_frontend" t-js="false"/>
+                <!-- add the extra css -->
+<!--                <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css"/>-->
+                <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/owl-carousel/1.3.3/owl.carousel.min.css"/>
+                <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/owl-carousel/1.3.3/owl.theme.min.css"/>
+       <!--                <link rel="stylesheet" type="text/scss" href="/login_design/static/css/login/login_slider.scss"/>-->
+         <style>
+                    .owl-carousel .owl-item{
+                            text-align: center;
+                        }
+                </style>
+            </xpath>
+
+            <xpath expr="//head/script" position="after">
+                <!-- add the extra js -->
+<!--                <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>-->
+<!--                <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>-->
+                <script type="text/javascript" src="https://code.jquery.com/jquery-1.12.0.min.js"></script>
+                <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/owl-carousel/1.3.3/owl.carousel.min.js"></script>
+                <script type="text/javascript">
+                        $(document).ready(function(){
+                        $("#testimonial-slider").owlCarousel({
+                            items:1,
+                            itemsDesktop:[1000,2],
+                            itemsDesktopSmall:[980,1],
+                            itemsTablet:[768,1],
+                            pagination:true,
+                            navigation:true,
+                            autoPlay:true
+                        });
+
+                    $(document).on("click", ".ni-eye", function(event){
+                        $(".ni-eye").addClass("icon-hide");
+                        $(".ni-eye-off").addClass("icon-show");
+                        $(".field-password input").attr( "type", "text" );
+
+
+                    });
+                    $(document).on("click", ".ni-eye-off", function(event){
+                        $(".ni-eye-off").removeClass("icon-show");
+                        $(".ni-eye").removeClass("icon-hide");
+                        $(".field-password input").attr( "type", "password" );
+
+
+                    });
+
+
+                    });
+
+
+
+                </script>
+
+            </xpath>
+
+        </template>
+
+        <template id="login_design.login_layout1"  name="login_design.login_layout"
+                  inherit_id="web.login_layout" primary="True">
+
+<!--        <template id="custom_login_layout" inherit_id="web.login_layout">-->
+        <xpath expr="//t[@t-call='web.frontend_layout']" position="replace">
+            <t t-call="login_design.frontend_layout3">
+            <t t-set="html_data" t-value="{'style': 'height: 100%;'}"/>
+            <t t-set="body_classname" t-value="'bg-100'"/>
+            <t t-set="no_header" t-value="True"/>
+            <t t-set="no_footer" t-value="True"/>
+
+            <div class="container-fluid px-0">
+                <div t-attf-class=" rows d-flex min-vh-100 {{login_card_classes}} o_database_list" >
+<!--                    style="max-width: 300px;"-->
+                    <div class="card-body col-5 px-5 py-5">
+                        <div t-attf-class="text-center pb-3 border-bottom {{'mb-3' if form_small else 'mb-4'}}">
+                            <img t-attf-src="/web/binary/company_logo{{ '?dbname='+db if db else '' }}" alt="Logo" style="max-height:120px; max-width: 100%; width:auto"/>
+                        </div>
+                        <t t-out="0"/>
+                        <div class="text-center small mt-4 pt-3 border-top" t-if="not disable_footer">
+                            <t t-if="not disable_database_manager">
+                                <a class="border-right pr-2 mr-1" href="/web/database/manager">Manage Databases</a>
+                            </t>
+                            <a href="https://www.odoo.com?utm_source=db&amp;utm_medium=auth" target="_blank">Powered by <span>Odoo</span></a>
+                        </div>
+                    </div>
+                    <div class="container col-7">
+                        <div class="row">
+                            <div class="col-md-12">
+                                <div id="testimonial-slider" class="owl-carousel py-5">
+                                    <!--  ////////////////////////////////////////////////////////  -->
+                                    <div class="testimonial-item equal-height style-6 px-3" style="height: 100%;">
+                                        <div class="testimonial-image cell-left">
+                                            <img src='/login_design/static/images/b2x.png' alt="Idara"/>
+                                        </div>
+                                    <div class="px-5">
+                                        <h3>Idara</h3>
+                                        <p class="px-5">You can start to create your products easily with its user-friendly design &amp; most completed responsive layout.</p>
+                                    </div>
+                                    </div>
+                                    <!--  ////////////////////////////////////////////////////////  -->
+                                    <div class="testimonial-item equal-height style-6 px-3" style="height: 254px;">
+                                        <div class="testimonial-image cell-left">
+                                            <img src="/login_design/static/images/c2x.png" alt="Idara"/>
+                                        </div>
+                                      <div class="px-5">
+                                        <h3>Idara</h3>
+                                        <p class="px-5">You can start to create your products easily with its user-friendly design &amp; most completed responsive layout.</p>
+                                    </div>
+                                    </div>
+                                    <!--  ////////////////////////////////////////////////////////  -->
+                                    <div class="testimonial-item equal-height style-6 px-3" style="height: 254px;">
+                                        <div class="testimonial-image cell-left">
+                                            <img src="/login_design/static/images/b2x.png" alt="Idata"/>
+                                        </div>
+                                        <div class="px-5">
+                                            <h3>Idara</h3>
+                                            <p class="px-5">You can start to create your products easily with its user-friendly design &amp; most completed responsive layout.</p>
+                                        </div>
+                                    </div>
+                                    <!--  ////////////////////////////////////////////////////////  -->
+
+                        </div>
+                    </div>
+                </div>
+                    </div>
+
+                </div>
+
+            </div>
+        </t>
+
+
+        </xpath>
+    </template>
+
+    <template id="login_design.login_style1" name="login_design.login" inherit_id="web.login" primary="True">
+<!--    <template id="custom_login" inherit_id="web.login" name="Custom Login">-->
+        <xpath expr="//t[@t-call='web.login_layout']" position="replace">
+        <t t-call="login_design.login_layout1">
+
+            <form class="oe_login_form px-4" role="form" t-attf-action="/web/login" method="post" onsubmit="this.action = '/web/login' + location.hash">
+                <h5 class="nk-block-title">Sign-In</h5>
+                <div class="nk-block-des"> <p>Access to your account using your email and passcode.</p></div>
+                <input type="hidden" name="csrf_token" t-att-value="request.csrf_token()"/>
+
+                <div class="form-group field-db" t-if="databases and len(databases) &gt; 1">
+                    <label for="db" class="col-form-label">Database</label>
+                    <div t-attf-class="input-group {{'input-group-sm' if form_small else ''}}">
+                        <input type="text" name="db" t-att-value="request.db" id="db" t-attf-class="form-control #{'form-control-sm' if form_small else ''}" required="required" readonly="readonly"/>
+                        <span class="input-group-append">
+                            <a role="button" href="/web/database/selector" class="btn btn-secondary">Select <i class="fa fa-database" role="img" aria-label="Database" title="Database"></i></a>
+                        </span>
+                    </div>
+                </div>
+
+                <div class="form-group field-login">
+                    <div class="form-label-group d-flex justify-content-between">
+                        <label for="login">Email</label>
+                        <a  target="_blank" t-attf-href="https://www.odoo.com/help">Need help?</a>
+                    </div>
+
+                    <input type="text" placeholder="Email" name="login" t-att-value="login" id="login" t-attf-class="form-control #{'form-control-sm' if form_small else ''}" required="required" autofocus="autofocus" autocapitalize="off"/>
+                </div>
+
+                <div class="form-group field-password">
+                    <div class="form-label-group d-flex justify-content-between">
+                        <label for="password">PassCode</label>
+                        <a t-attf-href="/web/reset_password?{{ keep_query() }}">Forgot Code?</a>
+                    </div>
+
+                    <a tabindex="-1" href="#" class="form-icon form-icon-right passcode-switch lg " data-target="password">
+                        <em class="passcode-icon icon ni ni-eye"></em>
+                        <em class="passcode-icon icon ni ni-eye-off"></em></a>
+                    <input type="password" placeholder="Password" name="password" id="password" t-attf-class="form-control #{'form-control-sm' if form_small else ''}" required="required" autocomplete="current-password" t-att-autofocus="'autofocus' if login else None" maxlength="4096"/>
+                </div>
+
+                <p class="alert alert-danger" t-if="error" role="alert">
+                    <t t-esc="error"/>
+                </p>
+                <p class="alert alert-success" t-if="message" role="status">
+                    <t t-esc="message"/>
+                </p>
+
+                <div t-attf-class="clearfix oe_login_buttons text-center mb-1 {{'pt-2' if form_small else 'pt-3'}}">
+                    <button type="submit" class="btn btn-primary btn-block">Log in</button>
+                    <div class="mt-2">
+                        <p>New on our platform? <a t-attf-href="/web/signup?{{ keep_query() }}">Create an account</a></p>
+<!--                        <a t-attf-href="/web/reset_password?{{ keep_query() }}">Reset Password</a>-->
+                    </div>
+                    <t t-if="debug">
+                        <button type="submit" name="redirect" value="/web/become" class="btn btn-link btn-sm btn-block">Log in as superuser</button>
+                    </t>
+                    <div class="o_login_auth"/>
+                </div>
+
+                <input type="hidden" name="redirect" t-att-value="redirect"/>
+            </form>
+        </t>
+        </xpath>
+    </template>
+
+
+<!--    rest password template     -->
+
+        <template id="login_design.reset_password" name="Reset password" inherit_id="auth_signup.reset_password" primary="True">
+            <xpath expr="//t[@t-call='web.login_layout']" position="replace">
+            <t t-call="login_design.login_layout1">
+                <h5 class="nk-block-title">Reset password</h5>
+                <div class="nk-block-des"><p>If you forgot your password, well, then we’ll email you instructions to reset your password.</p></div>
+                <div t-if="message" class="oe_login_form clearfix">
+                    <p class="alert alert-success" t-if="message" role="status">
+                        <t t-esc="message"/>
+                    </p>
+                    <a href="/web/login" class="btn btn-link btn-sm float-right" role="button">Back to Login</a>
+                </div>
+
+                <form class="oe_reset_password_form" role="form" method="post" t-if="not message">
+                  <input type="hidden" name="csrf_token" t-att-value="request.csrf_token()"/>
+
+                    <t t-if="token and not invalid_token">
+                        <t t-call="auth_signup.fields">
+                            <t t-set="only_passwords" t-value="1"/>
+                        </t>
+                    </t>
+
+                    <t t-if="not token">
+                        <div class="form-group field-login">
+                            <label for="login" class="col-form-label">Email</label>
+                            <input type="text" name="login" t-att-value="login" id="login" class="form-control"
+                                autofocus="autofocus" required="required" autocapitalize="off" placeholder="Email"/>
+                        </div>
+                    </t>
+
+                    <p class="alert alert-danger" t-if="error" role="alert">
+                        <t t-esc="error"/>
+                    </p>
+                    <input type="hidden" name="redirect" t-att-value="redirect"/>
+                    <input type="hidden" name="token" t-att-value="token"/>
+                    <div class="clearfix oe_login_buttons">
+                        <button type="submit" class="btn btn-primary btn-block">Confirm</button>
+                        <div class="d-flex justify-content-between align-items-center small mt-2">
+                            <a t-if="not token" t-attf-href="/web/login?{{ keep_query() }}">Back to Login</a>
+                            <a t-if="invalid_token" href="/web/login">Back to Login</a>
+                        </div>
+                        <div class="o_login_auth"/>
+                    </div>
+
+                </form>
+
+            </t>
+            </xpath>
+        </template>
+
+
+
+        <template id="login_design.fields" name="Auth Signup/ResetPassword form fields" inherit_id="auth_signup.fields" primary="True">
+            <xpath expr="//div[hasclass('field-login')]" position="replace">
+            <div class="form-group field-login">
+                <label for="login">Email</label>
+                <input type="text"  name="login" t-att-value="login" id="login" class="form-control form-control-sm" placeholder="Enter your email" autofocus="autofocus"
+                    autocapitalize="off" required="required" t-att-readonly="'readonly' if only_passwords else None"/>
+            </div>
+            </xpath>
+            <xpath expr="//div[hasclass('field-name')]" position="replace">
+            <div class="form-group field-name">
+                <label for="name">Name</label>
+                <input type="text" name="name" t-att-value="name" id="name" class="form-control form-control-sm" placeholder="Enter your name"
+                    required="required" t-att-readonly="'readonly' if only_passwords else None"
+                    t-att-autofocus="'autofocus' if login and not only_passwords else None" />
+            </div>
+            </xpath>
+            <xpath expr="//div[hasclass('field-password')]" position="replace">
+            <div class="form-group field-password pt-2">
+                <label for="password">Passcode</label>
+                <a tabindex="-1" href="#" class="form-icon form-icon-right passcode-switch lg " data-target="password">
+                    <em class="passcode-icon icon ni ni-eye"></em>
+                    <em class="passcode-icon icon ni ni-eye-off"></em>
+                </a>
+                <input type="password" name="password" id="password" class="form-control form-control-sm" placeholder="Enter your passcode"
+                    required="required" t-att-autofocus="'autofocus' if only_passwords else None"/>
+            </div>
+            </xpath>
+            <xpath expr="//div[hasclass('field-confirm_password')]" position="replace">
+            <div class="form-group field-confirm_password">
+                <label for="confirm_password">Confirm Passcode</label>
+                <input type="password" name="confirm_password" id="confirm_password" class="form-control form-control-sm" placeholder="Repeat your passcode" required="required"/>
+            </div>
+            </xpath>
+        </template>
+
+
+<!--        Sign up -->
+        <template id="login_design.signup" name="Sign up login" inherit_id="auth_signup.signup" primary="True">
+            <xpath expr="//t[@t-call='web.login_layout']" position="replace">
+            <t t-call="login_design.login_layout1">
+                <form class="oe_signup_form px-4" role="form" method="post" t-if="not message">
+                    <h5 class="nk-block-title">Register</h5>
+                    <div class="nk-block-des"> <p>Create New Account</p></div>
+                  <input type="hidden" name="csrf_token" t-att-value="request.csrf_token()"/>
+
+                    <t t-call="login_design.fields">
+                        <t t-set="only_passwords" t-value="bool(token and not invalid_token)"/>
+                    </t>
+
+                    <p class="alert alert-danger" t-if="error" role="alert">
+                        <t t-esc="error"/>
+                    </p>
+                    <input type="hidden" name="redirect" t-att-value="redirect"/>
+                    <input type="hidden" name="token" t-att-value="token"/>
+                    <div class="text-center oe_login_buttons pt-3">
+                        <button type="submit" class="btn btn-primary btn-block"> Sign up</button>
+                        <p>Already have an account ?<a t-attf-href="/web/login?{{ keep_query() }}" role="button"> Sign in instead</a></p>
+                        <div class="o_login_auth"/>
+                    </div>
+                </form>
+            </t>
+            </xpath>
+        </template>
+
+
+    </data>
+
+
+
+
+
+
+
+
+
+
+
+<!--    </data>-->
+</odoo>
